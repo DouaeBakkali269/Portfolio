@@ -321,7 +321,7 @@
             /* Changed from var(--bg) */
         }
 
-        /* Icon System: Cyan-Ring/Purple-Glow */
+        /* Icon System: glassy neon rings for hero + contact */
         .icon-circle {
             width: 64px;
             height: 64px;
@@ -330,13 +330,26 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: rgba(138, 43, 226, 0.15);
-            /* Purple base */
-            border: 1px solid rgba(0, 255, 243, 0.3);
-            /* Cyan ring base */
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 12px 40px rgba(0, 255, 65, 0.18), inset 0 1px 10px rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(12px) saturate(140%);
+            -webkit-backdrop-filter: blur(12px) saturate(140%);
             color: #fff;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .icon-circle::before {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.24), transparent 45%);
+            opacity: 0.7;
+            pointer-events: none;
         }
 
         .icon-circle.large {
@@ -346,12 +359,13 @@
 
         .icon-ring {
             position: absolute;
-            inset: -4px;
-            border: 2px solid rgba(0, 255, 243, 0.8);
-            /* Strong Cyan ring */
+            inset: -5px;
+            border: 1px solid rgba(0, 255, 65, 0.45);
             border-radius: 50%;
-            opacity: 0.5;
+            opacity: 0.45;
             transition: 0.4s;
+            box-shadow: 0 0 18px rgba(0, 255, 65, 0.28);
+            filter: blur(0.25px);
             animation: ring-pulse 4s infinite ease-in-out;
         }
 
@@ -365,35 +379,35 @@
 
             50% {
                 transform: scale(1.08);
-                opacity: 0.7;
+                opacity: 0.85;
             }
         }
 
         .icon-glow {
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.6) 0%, transparent 70%);
-            /* Purple core glow */
+            inset: -8px;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.35) 0%, transparent 70%);
             border-radius: 50%;
-            filter: blur(10px);
-            opacity: 0.3;
+            filter: blur(16px);
+            opacity: 0.45;
             transition: 0.4s;
             z-index: -1;
         }
 
         .hero-icon-link:hover .icon-circle,
         .contact-icon-card:hover .icon-circle {
-            transform: scale(1.1) translateY(-10px);
-            border-color: rgba(0, 255, 243, 1);
-            background: rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 30px rgba(0, 255, 243, 0.2);
+            transform: translateY(-8px) scale(1.04);
+            border-color: rgba(0, 255, 65, 0.95);
+            box-shadow: 0 18px 52px rgba(0, 255, 65, 0.32), inset 0 1px 14px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.06));
         }
 
         .hero-icon-link:hover .icon-ring,
         .contact-icon-card:hover .icon-ring {
             opacity: 1;
-            transform: scale(1.15);
-            box-shadow: 0 0 15px rgba(0, 255, 243, 0.5);
+            transform: scale(1.14);
+            box-shadow: 0 0 24px rgba(0, 255, 65, 0.5);
+            border-color: rgba(0, 255, 65, 0.85);
         }
 
         /* Education Logos */
@@ -426,13 +440,13 @@
             z-index: 1000;
             display: flex;
             gap: 24px;
-            padding: 12px 28px;
-            background: rgba(5, 5, 5, 0.85);
+            padding: 9px 22px;
+            background: rgba(5, 5, 5, 0.82);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 65, 0.3);
             border-radius: 999px;
             width: max-content;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 18px rgba(0, 255, 65, 0.28), 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             animation: nav-fade-in 0.8s ease-out forwards;
         }
 
@@ -1064,8 +1078,8 @@
         }
 
         .icon-circle.small {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
         }
     </style>
 </head>

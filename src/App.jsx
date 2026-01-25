@@ -65,11 +65,12 @@ function App() {
           bottom: 30px;
           left: 50%;
           transform: translateX(-50%);
-          background: rgba(10, 10, 10, 0.8);
-          backdrop-filter: blur(10px);
-          padding: 10px 30px;
+          background: rgba(10, 10, 10, 0.78);
+          backdrop-filter: blur(12px);
+          padding: 8px 22px;
           border-radius: 99px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(0, 255, 65, 0.28);
+          box-shadow: 0 0 18px rgba(0, 255, 65, 0.28), 0 10px 30px rgba(0, 0, 0, 0.45);
           z-index: 100;
         }
         .nav-container {
