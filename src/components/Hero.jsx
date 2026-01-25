@@ -1,8 +1,16 @@
-﻿import React from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Download } from 'lucide-react';
+import TextType from './TextType';
 
 const Hero = ({ data }) => {
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowSkeleton(false), 800);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section id="hero" className="hero-section">
       <div className="hero-content">
@@ -24,13 +32,13 @@ const Hero = ({ data }) => {
           transition={{ delay: 1, duration: 0.5 }}
           className="hero-actions"
         >
-          <a href={`mailto:${data.email}`} className="cyber-btn" title="Email">
+          <a href={`mailto:${data.email}`} className="glass-icon" title="Email">
             <Mail size={20} />
           </a>
-          <a href={data.linkedin} target="_blank" className="cyber-btn" title="LinkedIn">
+          <a href={data.linkedin} target="_blank" className="glass-icon" title="LinkedIn">
             <Linkedin size={20} />
           </a>
-          <a href={data.github} target="_blank" className="cyber-btn" title="GitHub">
+          <a href={data.github} target="_blank" className="glass-icon" title="GitHub">
             <Github size={20} />
           </a>
           <a href="CV_BAKKALI_DOUAE_PFE__DEV_Netopia.pdf" download className="cyber-btn primary">
@@ -45,13 +53,43 @@ const Hero = ({ data }) => {
           className="hero-text"
         >
           <span className="terminal-prompt">$ whoami</span>
-          <h1 className="hero-name name-shimmer" data-text={data.name}>{data.name}</h1>
-          <p className="hero-subtitle uppercase tracking-[0.3em] font-bold">{data.title}</p>
-          <p className="hero-summary">
-            Final-year Software Engineering student at <span className="text-white">ENSIAS</span>,
-            specializing in <span className="text-white">full-stack development</span> and
-            passionate about <span className="text-white">DevOps automation</span>.
-          </p>
+          {showSkeleton && (
+            <div className="skeleton-group">
+              <div className="skeleton-line skeleton-title" />
+              <div className="skeleton-line skeleton-subtitle" />
+            </div>
+          )}
+
+          <TextType
+            as="h1"
+            className="hero-name"
+            text={[
+              'DOUAE BAKKALI',
+              'Software Engineer | Full-Stack & DevOps'
+            ]}
+            typingSpeed={55}
+            pauseDuration={1500}
+            deletingSpeed={50}
+            showCursor
+            cursorCharacter="_"
+            variableSpeed={{ min: 60, max: 120 }}
+            cursorBlinkDuration={0.5}
+            initialDelay={300}
+          />
+
+          <TextType
+            as="div"
+            className="hero-info-box"
+            text={[
+              'Final-year Software Engineering student specializing in full-stack development and passionate about DevOps automation. Currently seeking PFE opportunities to apply and further develop my skills.'
+            ]}
+            typingSpeed={35}
+            pauseDuration={2000}
+            deletingSpeed={30}
+            loop={false}
+            showCursor={false}
+            initialDelay={600}
+          />
         </motion.div>
       </div>
 
@@ -105,6 +143,24 @@ const Hero = ({ data }) => {
         @keyframes shimmer {
           to { background-position: 200% center; }
         }
+        .skeleton-group { display: grid; gap: 10px; align-items: center; justify-items: center; margin-bottom: 10px; }
+        .skeleton-line {
+          position: relative;
+          overflow: hidden;
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.12);
+        }
+        .skeleton-title { width: 70%; height: 56px; border-radius: 6px; }
+        .skeleton-subtitle { width: 45%; height: 24px; border-radius: 6px; }
+        .skeleton-line::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+          animation: shimmer-load 1.2s infinite;
+        }
+        @keyframes shimmer-load { to { transform: translateX(100%); } }
         .terminal-prompt {
           color: var(--accent-primary);
           font-weight: bold;
@@ -112,19 +168,18 @@ const Hero = ({ data }) => {
           display: block;
           margin-bottom: 0.5rem;
         }
-        .hero-subtitle {
-          font-size: 1.2rem;
-          color: var(--accent-secondary);
-          opacity: 0.7;
-          margin-bottom: 2rem;
-        }
-        .hero-summary {
-          max-width: 600px;
-          margin: 0 auto;
-          color: #999;
+        .hero-info-box {
+          display: inline-block;
+          max-width: 720px;
+          margin: 20px auto 0;
+          padding: 16px 20px;
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: 8px;
+          color: var(--text-dim);
           font-size: 14px;
-          line-height: 1.6;
-          font-weight: 300;
+          line-height: 1.5;
+          text-align: center;
         }
         .hero-actions {
           margin: 40px 0;
@@ -162,6 +217,41 @@ const Hero = ({ data }) => {
         .cyber-btn.primary:hover {
           background: #00cc33;
           box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        /* Glass Icons - Scoped for styled-jsx */
+        .glass-icon {
+          width: 54px;
+          height: 54px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 14px;
+          background: transparent !important;
+          border: 2px solid rgba(255, 255, 255, 0.25);
+          box-shadow: inset 0 1px 4px rgba(255,255,255,0.08),
+                      0 8px 32px rgba(0,255,65,0.12);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          color: #fff;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+          position: relative;
+          padding: 0;
+        }
+        .glass-icon:hover {
+          transform: translateY(-4px);
+          border-color: rgba(0, 255, 65, 0.8);
+          box-shadow: inset 0 1px 6px rgba(255,255,255,0.12),
+                      0 12px 40px rgba(0,255,65,0.3);
+        }
+        .glass-icon svg {
+          filter: drop-shadow(0 0 8px rgba(0,255,65,0.4));
+          transition: filter 0.3s ease;
+        }
+        .glass-icon:hover svg {
+          filter: drop-shadow(0 0 14px rgba(0,255,65,0.6));
         }
       `}</style>
     </section>
