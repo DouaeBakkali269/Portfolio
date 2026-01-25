@@ -1,649 +1,785 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Douae Bakkali | Software Engineer Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Douae Bakkali | Software Engineer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --accent: #00ff41;
+            --accent-dim: rgba(0, 255, 65, 0.2);
+            --bg: #030303;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Mesh Background */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(at 0% 0%, hsla(135, 100%, 30%, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(180, 100%, 30%, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(135, 100%, 30%, 0.1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(180, 100%, 30%, 0.1) 0, transparent 50%);
+            filter: blur(80px);
+            animation: mesh-move 20s infinite alternate;
+        }
+
+        @keyframes mesh-move {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1) translate(-2%, -2%);
+            }
+        }
+
+        .glass {
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .cyber-btn {
+            position: relative;
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
+        .cyber-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .primary-btn {
+            background: var(--accent);
+            color: #000;
+            font-weight: 800;
+        }
+
+        .primary-btn:hover {
+            background: #00cc33;
+            color: #000;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Glitch Animation */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            /* Changed from var(--bg) */
+        }
+
+        /* Icon System: Cyan-Ring/Purple-Glow */
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: rgba(138, 43, 226, 0.15);
+            /* Purple base */
+            border: 1px solid rgba(0, 255, 243, 0.3);
+            /* Cyan ring base */
+            color: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+
+        .icon-circle.large {
+            width: 90px;
+            height: 90px;
+        }
+
+        .icon-ring {
+            position: absolute;
+            inset: -4px;
+            border: 2px solid rgba(0, 255, 243, 0.8);
+            /* Strong Cyan ring */
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: 0.4s;
+            animation: ring-pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes ring-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 0.7;
+            }
+        }
+
+        .icon-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.6) 0%, transparent 70%);
+            /* Purple core glow */
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.3;
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .hero-icon-link:hover .icon-circle,
+        .contact-icon-card:hover .icon-circle {
+            transform: scale(1.1) translateY(-10px);
+            border-color: rgba(0, 255, 243, 1);
+            background: rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 243, 0.2);
+        }
+
+        .hero-icon-link:hover .icon-ring,
+        .contact-icon-card:hover .icon-ring {
+            opacity: 1;
+            transform: scale(1.15);
+            box-shadow: 0 0 15px rgba(0, 255, 243, 0.5);
+        }
+
+        .hero-icon-link:hover .icon-glow,
+        .contact-icon-card:hover .icon-glow {
+            opacity: 0.8;
+            transform: scale(1.2);
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #00f3ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(31px, 9999px, 94px, 0);
+            }
+
+            50% {
+                clip: rect(70px, 9999px, 71px, 0);
+            }
+
+            100% {
+                clip: rect(67px, 9999px, 122px, 0);
+            }
+        }
+
+        /* Circular Icons */
+        .icon-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #fff;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-dim);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .icon-btn::after {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0;
+            filter: blur(15px);
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .hero-icon-link:hover .icon-glow,
+        .contact-icon-card:hover .icon-glow {
+            opacity: 0.8;
+            transform: scale(1.2);
+        }
+
+        /* Expanding CV Button */
+        .cv-btn-container {
+            display: flex;
+            align-items: center;
+            background: rgba(138, 43, 226, 0.15);
+            border: 1px solid rgba(0, 255, 243, 0.3);
+            border-radius: 99px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 64px;
+            width: 64px;
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .cv-btn-container:hover {
+            width: 220px;
+            padding: 0 25px;
+            border-color: rgba(0, 255, 243, 1);
+            background: rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 243, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .cv-btn-container i {
+            min-width: 64px;
+            display: flex;
+            justify-content: center;
+            transition: 0.4s;
+        }
+
+        .cv-btn-container span {
+            opacity: 0;
+            transform: translateX(20px);
+            white-space: nowrap;
+            font-weight: 800;
+            font-size: 14px;
+            transition: 0.4s;
+            position: absolute;
+            left: 64px;
+        }
+
+        .cv-btn-container:hover span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cv-btn-container:hover i {
+            min-width: 24px;
+            margin-right: 15px;
+        }
+
+        /* Name Shimmer */
+        .name-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .name-shimmer {
+            background: linear-gradient(90deg, #fff, var(--accent), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* Added standard property */
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-text 3s linear infinite;
+        }
+
+        @keyframes shimmer-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
 </head>
-<body>
-    <!-- IDE Style Header -->
-    <header class="ide-header">
-        <div class="ide-menu">
-            <span class="menu-item active">DouaeBakkali.java</span>
-            <span class="menu-item">Experience.js</span>
-            <span class="menu-item">Projects.config</span>
-            <span class="menu-item">Skills.yml</span>
-        </div>
-        <div class="ide-controls">
-            <span class="control-btn close"></span>
-            <span class="control-btn minimize"></span>
-            <span class="control-btn maximize"></span>
-        </div>
-    </header>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Sidebar - Like IDE Project Explorer -->
-        <aside class="sidebar">
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="assets/images/profile.jpg" alt="Douae Bakkali">
-                </div>
-                <div class="profile-info">
-                    <h1>Douae Bakkali</h1>
-                    <p class="title">Software Engineer</p>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Rabat, Morocco</p>
-                </div>
-                <div class="profile-links">
-                    <a href="mailto:bakkalidouae75@gmail.com" class="link-btn email">
-                        <i class="fas fa-envelope"></i> Email
+<body class="no-scrollbar">
+    <div class="mesh-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 glass rounded-full px-6 py-3 flex gap-8">
+        <a href="#hero" class="text-xs text-dim hover:text-[var(--accent)] transition">~/home</a>
+        <a href="#experience" class="text-xs text-dim hover:text-[var(--accent)] transition">~/exp</a>
+        <a href="#projects" class="text-xs text-dim hover:text-[var(--accent)] transition">~/work</a>
+        <a href="#skills" class="text-xs text-dim hover:text-[var(--accent)] transition">~/tools</a>
+        <a href="#contact" class="text-xs text-dim hover:text-[var(--accent)] transition">~/contact</a>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div id="progress" class="fixed top-0 left-0 h-[2px] bg-[var(--accent)] z-[1000] transition-all duration-300"
+        style="width: 0%"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="reveal active">
+            <div class="relative w-80 h-80 md:w-[400px] md:h-[400px] mx-auto mb-8">
+                <img src="profile.png" alt="Douae Bakkali" class="w-full h-full object-contain relative z-10"
+                    style="mask-image: linear-gradient(to bottom, black 85%, transparent 100%);">
+                <div class="absolute inset-0 bg-[var(--accent)] blur-[100px] opacity-20 animate-pulse"></div>
+            </div>
+
+            <span class="text-[var(--accent)] font-bold mb-2 block">$ whoami</span>
+            <div class="name-container">
+                <h1 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4 glitch name-shimmer"
+                    data-text="DOUAE BAKKALI">
+                    DOUAE BAKKALI
+                </h1>
+            </div>
+            <p class="text-xl md:text-2xl text-[var(--accent-secondary)] opacity-70 font-light mb-6">Software Engineer
+                | Full-Stack & DevOps</p>
+            <p class="max-w-2xl mx-auto text-gray-500 text-sm mb-10 leading-relaxed font-light">Final-year Software
+                Engineering student specializing in <span class="text-white">full-stack development</span> and
+                passionate about <span class="text-white">DevOps automation</span>. Currently seeking PFE opportunities
+                to apply and further develop my skills.</p>
+
+            <div class="flex flex-wrap justify-center gap-8 items-center mt-12">
+                <a href="mailto:bakkalidouae75@gmail.com" class="hero-icon-link" title="Email">
+                    <div class="icon-circle">
+                        <i data-lucide="mail"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/douae-bakkali/" target="_blank" class="hero-icon-link"
+                    title="LinkedIn">
+                    <div class="icon-circle">
+                        <i data-lucide="linkedin"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
+                    </div>
+                </a>
+                <a href="https://github.com/DouaeBakkali269/" target="_blank" class="hero-icon-link" title="GitHub">
+                    <div class="icon-circle">
+                        <i data-lucide="github"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
+                    </div>
+                </a>
+
+                <div class="relative group">
+                    <a href="CV_BAKKALI_DOUAE_PFE__DEV_Netopia.pdf" download class="cv-btn-container">
+                        <i data-lucide="download"></i>
+                        <span>DOWNLOAD CV</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/douae-bakkali/" target="_blank" class="link-btn linkedin">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/DouaeBakkali269/" target="_blank" class="link-btn github">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-           <a href="assets/cv_eng (1).pdf" download="DouaeBakkali_CV.pdf" class="cv-download-btn">
-               <i class="fas fa-download" style="color: white;"></i>  <span style="color: white;">Download My CV</span>
-           </a>
+                    <div class="icon-ring absolute inset-0 pointer-events-none group-hover:opacity-100 group-hover:scale-110"
+                        style="inset: -4px; border-radius: 99px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="max-w-5xl mx-auto py-32 px-6">
+        <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">01.</span> Professional_Path</h2>
+        <div class="space-y-12">
+            <!-- Zen Networks -->
+            <div class="glass p-8 rounded-lg reveal">
+                <div class="flex flex-col md:flex-row justify-between mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold">DevOps Intern</h3>
+                        <span class="text-[var(--accent)]">@ Zen Networks Solutions Inc.</span>
+                    </div>
+                    <span class="text-gray-500">June – August 2025</span>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8">
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Implemented a complete DevOps
+                        workflow for a web application</li>
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Containerized a full web
+                        application (backend in Spring Boot, frontend in React/Next.js)</li>
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Built a robust CI/CD pipeline on
+                        GitLab to automate build, test, and deployment processes</li>
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Evaluated various deployment
+                        architectures on AWS and provisioned the selected one using Terraform</li>
+                </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">DOCKER</span>
+                    <span class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">GITLAB
+                        CI/CD</span>
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">TERRAFORM</span>
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">AWS</span>
                 </div>
             </div>
 
-            <div class="sidebar-menu">
-                <div class="menu-section">
-                    <h3><i class="fas fa-folder-open"></i> Navigation</h3>
-                    <ul>
-                        <li class="active" data-section="about"><i class="fas fa-user"></i> About</li>
-                        <li data-section="experience"><i class="fas fa-briefcase"></i> Experience</li>
-                        <li data-section="projects"><i class="fas fa-project-diagram"></i> Projects</li>
-                        <li data-section="skills"><i class="fas fa-code"></i> Skills</li>
-                        <li data-section="education"><i class="fas fa-graduation-cap"></i> Education</li>
-
-
-
-                    </ul>
+            <!-- Regional Admin -->
+            <div class="glass p-8 rounded-lg reveal">
+                <div class="flex flex-col md:flex-row justify-between mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold">Web Development Intern</h3>
+                        <span class="text-[var(--accent)]">@ Regional Administration of Tanger–Tétouan–Al Hoceima</span>
+                    </div>
+                    <span class="text-gray-500">July 2024</span>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8">
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Developed a complete inventory
+                        management system automating equipment requests and document generation</li>
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Used Java Spring Boot for the
+                        backend and ReactJS for the frontend</li>
+                    <li class="flex gap-4"><span class="text-[var(--accent)]">▹</span> Designed the MySQL schema and
+                        implemented secure REST APIs with Spring Security</li>
+                </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">JAVA</span>
+                    <span class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">SPRING
+                        BOOT</span>
+                    <span class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">SPRING
+                        SECURITY</span>
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">REACT</span>
+                    <span
+                        class="text-[10px] border border-[var(--accent-dim)] px-2 py-1 text-[var(--accent)]">MYSQL</span>
                 </div>
             </div>
-        </aside>
+        </div>
+    </section>
 
-        <!-- Main Content -->
-        <main class="content">
-          <!-- About Section (Split View) -->
-<section id="about" class="section active">
-        <!-- ADD THIS TITLE -->
-        <!-- END TITLE -->
-    <!-- Wrapper for the two side-by-side cards -->
-    <div class="about-content-split" style="margin-top: 30px;">
-
-        <!-- Card 1: The Code Block -->
-        <div class="about-code-card">
-            <div class="card-header about-code-header">
-                <i class="fab fa-java" style="color: var(--java-color); margin-right: 5px;"></i> DouaeBakkali.java
+    <!-- Projects -->
+    <section id="projects" class="max-w-5xl mx-auto py-32 px-6">
+        <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">02.</span> Projects.js</h2>
+        <div class="space-y-10">
+            <!-- SmartTransit -->
+            <div class="glass p-10 rounded-xl reveal">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-3xl font-bold">SmartTransit</h3>
+                        <p class="text-[var(--accent)] text-sm mt-1">Microservices-Based Urban Transport Management</p>
+                    </div>
+                    <div class="flex gap-4 text-gray-500">
+                        <i data-lucide="github" class="hover:text-[var(--accent)] cursor-pointer"></i>
+                    </div>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Implemented a microservices
+                        architecture with Spring Boot, inter-service communication via REST and Kafka</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Designed independent services for
+                        user management, ticketing, routes, subscriptions, and notifications</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Each microservice utilizes its
+                        own PostgreSQL database for complete isolation</li>
+                </ul>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">SPRING CLOUD</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">KAFKA</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">POSTGRESQL</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">NEXT.JS</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">DOCKER</span>
+                </div>
+                <div class="text-sm text-gray-600 font-bold uppercase tracking-tighter">Status: ONGOING</div>
             </div>
-            <div class="about-code-content">
-                <pre><code class="language-java">
- <span class="comment">/**
-  * Software Engineering student at ENSIAS with a passion for
-  * building robust and scalable applications. Eager to leverage
-  * skills in Java, Spring Boot, React, and DevOps practices
-  * to contribute to innovative projects. 
-  */</span>
 
- <span class="keyword">private final</span> <span class="type">String</span> <span class="variable">fullName</span> <span class="operator">=</span> <span class="string">"Douae Bakkali"</span><span class="punctuation">;</span>
- <span class="keyword">private final</span> <span class="type">String</span> <span class="variable">currentRole</span> <span class="operator">=</span> <span class="string">"Software Engineering Student"</span><span class="punctuation">;</span>
- <span class="keyword">private final</span> <span class="type">String</span> <span class="variable">location</span> <span class="operator">=</span> <span class="string">"Rabat, Morocco"</span><span class="punctuation">;</span>
+            <!-- AstroLearn -->
+            <div class="glass p-10 rounded-xl reveal">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-3xl font-bold">AstroLearn</h3>
+                        <p class="text-[var(--accent)] text-sm mt-1">Collaborative Space Exploration Platform</p>
+                    </div>
+                    <div class="flex gap-4 text-gray-500">
+                        <i data-lucide="github" class="hover:text-[var(--accent)] cursor-pointer"></i>
+                    </div>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Designed a system for article
+                        sharing, space mission calendars, and educational courses using UML</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Developed backend APIs with
+                        Spring Boot and PostgreSQL, and frontend with Next.js/ReactJS</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Implemented automated testing
+                        (JUnit, Mockito) and moderation powered by LLMs</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Containerized with Docker and
+                        deployed via Terraform on AWS</li>
+                </ul>
+                <div class="flex flex-wrap gap-4">
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">SPRING BOOT</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">POSTGRESQL</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">NEXT.JS</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">JUNIT</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">TERRAFORM</span>
+                </div>
+                <div class="text-sm text-gray-600 font-bold uppercase tracking-tighter mt-4">Date: MARCH 2025</div>
+            </div>
 
- <span class="keyword">private final</span> <span class="type">String</span><span class="punctuation">[]</span> <span class="variable">keySkills</span> <span class="operator">=</span> <span class="punctuation">{</span>
-   <span class="string">"Java"</span><span class="punctuation">,</span> <span class="string">"Spring Boot"</span><span class="punctuation">,</span> <span class="string">"Python"</span><span class="punctuation">,</span> <span class="string">"React.js"</span><span class="punctuation">,</span> <span class="string">"Next.js"</span><span class="punctuation">,</span> 
-   <span class="string">"JavaScript"</span><span class="punctuation">,</span><span class="string">"SQL (MySQL, Oracle)"</span><span class="punctuation">,</span> <span class="string">"Git"</span><span class="punctuation">,</span>
-   <span class="string">"Docker"</span><span class="punctuation">,</span> <span class="string">"CI/CD Concepts"</span><span class="punctuation">,</span> <span class="string">"Jenkins"</span><span class="punctuation">,</span> <span class="string">"Maven"</span>
- <span class="punctuation">};</span>
+            <!-- Internship Management -->
+            <div class="glass p-10 rounded-xl reveal">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-3xl font-bold">Internship Management System</h3>
+                        <p class="text-[var(--accent)] text-sm mt-1">Centralized Higher Education Platform</p>
+                    </div>
+                    <div class="flex gap-4 text-gray-500">
+                        <i data-lucide="github" class="hover:text-[var(--accent)] cursor-pointer"></i>
+                    </div>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Developed a web application for
+                        centralized internship management, handling students, companies, and supervisors</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Led backend development using
+                        Spring Boot, implementing business logic, REST APIs, and database integration with JPA</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Secured API endpoints with Spring
+                        Security; coordinated closely with frontend integration</li>
+                    <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span> Containerized the application
+                        with Docker and managed version control using Git</li>
+                </ul>
+                <div class="flex flex-wrap gap-4">
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">SPRING BOOT</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">REACTJS</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">ORACLE DB</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">PPA</span>
+                    <span class="text-xs font-bold text-[var(--accent)] tracking-widest">DOCKER</span>
+                </div>
+                <div class="text-sm text-gray-600 font-bold uppercase tracking-tighter mt-4">Timeline: 2024 - 2025</div>
+            </div>
+        </div>
+    </section>
 
- <span class="comment">// Connect via sidebar links!</span>
-                </code></pre>
+    <!-- Technical Toolkit -->
+    <section id="skills" class="max-w-5xl mx-auto py-32 px-6">
+        <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">03.</span> Technical_Toolkit</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-lg reveal">
+                <h4 class="text-xs text-[var(--accent)] uppercase tracking-widest mb-6">Languages</h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Java</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Python</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">JavaScript</span>
+                </div>
+                <div class="mt-8">
+                    <h4 class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Spoken</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="text-xs text-gray-400">Arabic (Native)</span>
+                        <span class="text-xs text-gray-400">French (Fluent)</span>
+                        <span class="text-xs text-gray-400">English (Fluent)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-lg reveal">
+                <h4 class="text-xs text-[var(--accent)] uppercase tracking-widest mb-6">Frameworks & Tools</h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Spring Boot</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">React</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Next.js</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Docker</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Kubernetes</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Terraform</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">GitLab CI</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Ansible</span>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-lg reveal">
+                <h4 class="text-xs text-[var(--accent)] uppercase tracking-widest mb-6">Methodologies</h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Microservices</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">REST API Design</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Agile/Scrum</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">UML</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">OOP</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">PostgreSQL</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">MySQL</span>
+                    <span class="bg-white/5 py-1 px-4 rounded text-sm">Oracle</span>
+                </div>
             </div>
         </div>
 
-        <!-- Card 2: The Terminal Animation -->
-        <div class="about-terminal-card">
-            <!-- Re-using original terminal structure & classes -->
-            <div class="terminal-window">
-                 <div class="terminal-header">
-                     <div class="terminal-controls">
-                         <span class="control-btn close"></span>
-                         <span class="control-btn minimize"></span>
-                         <span class="control-btn maximize"></span>
-                     </div>
-                     <span class="terminal-title">bash ~ % info_terminal</span>
-                 </div>
-                 <div class="terminal-body">
-                     <!-- Initial command line for JS animation -->
-                     <p class="command-line">
-                         <span class="prompt">douae@portfolio:~$</span> <span class="cursor">_</span>
-                     </p>
-                 </div>
-             </div>
+        <!-- Certifications -->
+        <div class="mt-20">
+            <h3 class="text-2xl font-bold mb-8 reveal">Certifications</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass p-6 rounded reveal flex items-center gap-4">
+                    <i data-lucide="award" class="text-[var(--accent)]"></i>
+                    <div>
+                        <p class="font-bold">Artificial Intelligence Analyst Certificate</p>
+                        <p class="text-xs text-gray-500">IBM | March 2025</p>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded reveal flex items-center gap-4">
+                    <i data-lucide="award" class="text-[var(--accent)]"></i>
+                    <div>
+                        <p class="font-bold">Spring Framework Specialization</p>
+                        <p class="text-xs text-gray-500">LearnQuest | March 2025</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+    </section>
 
-    </div> <!-- End about-content-split -->
-
-
-
-
-</section>
-<!-- End About Section -->
-
-            <!-- Experience Section -->
-            <section id="experience" class="section">
-                <div class="section-header">
-                    <h2><span class="keyword">public interface</span> <span class="class-name">ProfessionalExperience</span> <span class="punctuation">{</span></h2>
+    <!-- Education -->
+    <section id="education" class="max-w-5xl mx-auto py-32 px-6">
+        <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">04.</span> Education</h2>
+        <div class="space-y-12">
+            <div class="relative pl-8 border-l border-[var(--accent-dim)] reveal">
+                <div class="absolute -left-[5px] top-0 w-2 h-2 bg-[var(--accent)] rounded-full"></div>
+                <div class="flex flex-col md:flex-row justify-between mb-4">
+                    <h3 class="text-xl font-bold">Engineering Student – Software Engineering</h3>
+                    <span class="text-gray-500">2023 – 2026</span>
                 </div>
-                
-                <div class="experience-cards">
-                    <!-- Experience Card 1 -->
-                    <div class="experience-card">
-                        <div class="card-header">
-                            <h3><span class="keyword">public void</span> <span class="method-name">wilayaInternship</span><span class="punctuation">()</span> <span class="punctuation">{</span></h3>
-                            <div class="job-meta">
-                                <span class="company">Wilaya of Tanger-Tetouan-Al Hoceima</span>
-                                <span class="date">Jul 2024</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="code-comment">/** Web Development Intern */</div>
-                            <ul class="responsibilities">
-                                <li>Developed web app for IT inventory management</li>
-                                <li>SpringBoot Backend + ReactJS Frontend</li>
-                                <li>MySQL Database integration</li>
-                                <li>UML design and documentation</li>
-                            </ul>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag java">Java</span>
-                            <span class="tech-tag spring">Spring Boot</span>
-                            <span class="tech-tag react">React</span>
-                            <span class="tech-tag mysql">MySQL</span>
-                        </div>
-                        <div class="card-footer">
-                            <span class="punctuation">}</span>
-                        </div>
+                <p class="text-gray-400">ENSIAS, Rabat</p>
+            </div>
+            <div class="relative pl-8 border-l border-[var(--accent-dim)] reveal">
+                <div class="absolute -left-[5px] top-0 w-2 h-2 bg-[var(--accent)] rounded-full"></div>
+                <div class="flex flex-col md:flex-row justify-between mb-4">
+                    <h3 class="text-xl font-bold">Preparatory Classes (MP)</h3>
+                    <span class="text-gray-500">2021 – 2023</span>
+                </div>
+                <p class="text-gray-400">Lycée Moulay Hassan, Tangier</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-5xl mx-auto py-32 px-6">
+        <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">05.</span> Get_In_Touch</h2>
+        <div class="glass p-12 rounded-2xl flex flex-col items-center text-center reveal">
+            <div class="mb-10">
+                <h3 class="text-5xl font-extrabold mb-4 uppercase tracking-tighter">Let's Connect</h3>
+                <p class="text-gray-500 font-light max-w-xl mx-auto">Currently open to <span class="text-white">PFE
+                        opportunities</span> and innovative collaborations. Feel free to reach out via any of the
+                    channels below.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-12 items-center mb-12">
+                <a href="mailto:bakkalidouae75@gmail.com" class="contact-icon-card group" title="Email Me">
+                    <div class="icon-circle large">
+                        <i data-lucide="mail" size="32"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
                     </div>
-                </div>
-                
-                <div class="section-footer">
-                    <span class="punctuation">}</span>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
-            <section id="projects" class="section">
-                <div class="section-header">
-                    <h2><span class="keyword">public abstract class</span> <span class="class-name">AcademicProjects</span> <span class="punctuation">{</span></h2>
-                </div>
-                
-                <div class="project-cards">
-                    <!-- Project Card 1 -->
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Internship Management System</h3>
-                            <div class="project-meta">
-                                <span class="date">2024</span>
-                                <span class="team-size">Team of 2</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p>Web platform to streamline internship processes for students, companies, and universities.</p>
-                            <div class="features">
-                                <h4>Key Features:</h4>
-                                <ul>
-                                    <li>Dashboard interfaces for different user roles</li>
-                                    <li>Internship lifecycle management</li>
-                                    <li>Application tracking system</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag java">Java</span>
-                            <span class="tech-tag spring">Spring Boot</span>
-                            <span class="tech-tag react">Next.js</span>
-                            <span class="tech-tag oracle">Oracle</span>
-                            <span class="tech-tag docker">Docker</span>
-                        </div>
-                        <div class="card-footer">
-                            <div class="github-link">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </div>
-                        </div>
+                    <span
+                        class="mt-4 block text-xs opacity-50 group-hover:opacity-100 group-hover:text-[var(--accent)] transition">EMAIL</span>
+                </a>
+                <a href="https://www.linkedin.com/in/douae-bakkali/" target="_blank" class="contact-icon-card group"
+                    title="LinkedIn Profile">
+                    <div class="icon-circle large">
+                        <i data-lucide="linkedin" size="32"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
                     </div>
-                    
-                    <!-- Project Card 2 -->
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Training Management Web App</h3>
-                            <div class="project-meta">
-                                <span class="date">2024</span>
-                                <span class="team-size">Team of 2</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p>Web application for managing training sessions, participants, and trainers.</p>
-                            <div class="features">
-                                <h4>Key Features:</h4>
-                                <ul>
-                                    <li>Session scheduling system</li>
-                                    <li>Participant registration</li>
-                                    <li>Trainer management</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag java">Java</span>
-                            <span class="tech-tag spring">Spring Boot</span>
-                            <span class="tech-tag html">HTML/CSS/JS</span>
-                            <span class="tech-tag mysql">MySQL</span>
-                        </div>
-                        <div class="card-footer">
-                            <div class="github-link">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </div>
-                        </div>
+                    <span
+                        class="mt-4 block text-xs opacity-50 group-hover:opacity-100 group-hover:text-[var(--accent)] transition">LINKEDIN</span>
+                </a>
+                <a href="https://github.com/DouaeBakkali269/" target="_blank" class="contact-icon-card group"
+                    title="GitHub Profile">
+                    <div class="icon-circle large">
+                        <i data-lucide="github" size="32"></i>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
                     </div>
-                </div>
-                
-                <div class="section-footer">
-                    <span class="punctuation">}</span>
-                </div>
-            </section>
+                    <span
+                        class="mt-4 block text-xs opacity-50 group-hover:opacity-100 group-hover:text-[var(--accent)] transition">GITHUB</span>
+                </a>
+            </div>
 
-                     <!-- Skills Section -->
-                     <section id="skills" class="section">
-                        <div class="section-header">
-                            <h2><span class="keyword">public enum</span> <span class="class-name">TechnicalSkills</span> <span class="punctuation">{</span></h2>
-                        </div>
-        
-                        <div class="skills-container">
-                            <div class="skill-category">
-                                <h3><span class="annotation">@BackEnd</span></h3>
-                                <div class="skills-grid">
-                                    <div class="skill-item">
-                                        <!-- Added java-icon class -->
-                                        <div class="skill-icon java-icon">
-                                            <i class="fab fa-java"></i>
-                                        </div>
-                                        <div class="skill-name">Java</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 95%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Kept spring-icon class -->
-                                        <div class="skill-icon spring-icon">
-                                            <img src="assets/images/spring-icon.png" alt="Spring">
-                                        </div>
-                                        <div class="skill-name">Spring Boot</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added python-icon class -->
-                                        <div class="skill-icon python-icon">
-                                            <i class="fab fa-python"></i>
-                                        </div>
-                                        <div class="skill-name">Python</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added node-icon class -->
-                                        <div class="skill-icon node-icon">
-                                            <i class="fab fa-node-js"></i>
-                                        </div>
-                                        <div class="skill-name">Node.js</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 75%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="skill-category">
-                                <h3><span class="annotation">@FrontEnd</span></h3>
-                                <div class="skills-grid">
-                                    <div class="skill-item">
-                                        <!-- Kept react-icon class -->
-                                        <div class="skill-icon react-icon">
-                                            <i class="fab fa-react"></i>
-                                        </div>
-                                        <div class="skill-name">React.js</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added nextjs-icon class (using generic fa-js for styling) -->
-                                        <div class="skill-icon nextjs-icon">
-                                            <i class="fab fa-js"></i> <!-- Using JS icon, you might want a specific Next.js SVG/image -->
-                                        </div>
-                                        <div class="skill-name">Next.js</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added html-icon class -->
-                                        <div class="skill-icon html-icon">
-                                            <i class="fab fa-html5"></i>
-                                        </div>
-                                        <div class="skill-name">HTML/CSS</div> <!-- Combined, could split if needed -->
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added js-icon class -->
-                                        <div class="skill-icon js-icon">
-                                            <i class="fab fa-js-square"></i>
-                                        </div>
-                                        <div class="skill-name">JavaScript</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Kept material-ui-icon class, changed icon -->
-                                        <div class="skill-icon material-ui-icon">
-                                            <i class="fas fa-cubes"></i> <!-- Changed from fa-mui to a valid icon -->
-                                        </div>
-                                        <div class="skill-name">Material-UI</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="skill-category">
-                                <h3><span class="annotation">@DevOps</span></h3>
-                                <div class="skills-grid">
-                                    <div class="skill-item">
-                                        <!-- Kept docker-icon class -->
-                                        <div class="skill-icon docker-icon">
-                                            <i class="fab fa-docker"></i>
-                                        </div>
-                                        <div class="skill-name">Docker</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Kept git-icon class -->
-                                        <div class="skill-icon git-icon">
-                                            <i class="fab fa-git-alt"></i>
-                                        </div>
-                                        <div class="skill-name">Git</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added cicd-icon class -->
-                                        <div class="skill-icon cicd-icon">
-                                            <i class="fas fa-code-branch"></i>
-                                        </div>
-                                        <div class="skill-name">CI/CD</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added maven-icon class -->
-                                        <div class="skill-icon maven-icon">
-                                            <i class="fas fa-server"></i> <!-- Using generic server icon -->
-                                        </div>
-                                        <div class="skill-name">Maven</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 75%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added linux-icon class -->
-                                        <div class="skill-icon linux-icon">
-                                            <i class="fab fa-linux"></i>
-                                        </div>
-                                        <div class="skill-name">Linux</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added jenkins-icon class -->
-                                        <div class="skill-icon jenkins-icon">
-                                            <i class="fab fa-jenkins"></i>
-                                        </div>
-                                        <div class="skill-name">Jenkins</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added ansible-icon class -->
-                                        <div class="skill-icon ansible-icon">
-                                            <i class="fas fa-tools"></i> <!-- Using generic tools icon -->
-                                        </div>
-                                        <div class="skill-name">Ansible</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 75%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="skill-category">
-                                <h3><span class="annotation">@Databases</span></h3>
-                                <div class="skills-grid">
-                                    <div class="skill-item">
-                                        <!-- Added mysql-icon class -->
-                                        <div class="skill-icon mysql-icon">
-                                            <i class="fas fa-database"></i>
-                                        </div>
-                                        <div class="skill-name">MySQL</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added oracle-icon class -->
-                                        <div class="skill-icon oracle-icon">
-                                            <i class="fas fa-database"></i>
-                                        </div>
-                                        <div class="skill-name">Oracle</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added postgresql-icon class -->
-                                        <div class="skill-icon postgresql-icon">
-                                            <i class="fas fa-database"></i>
-                                        </div>
-                                        <div class="skill-name">PostgreSQL</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 75%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <!-- Added sqlserver-icon class -->
-                                        <div class="skill-icon sqlserver-icon">
-                                            <i class="fas fa-database"></i>
-                                        </div>
-                                        <div class="skill-name">SQL Server</div>
-                                        <div class="skill-level">
-                                            <div class="level-bar" style="width: 70%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="section-footer">
-                            <span class="punctuation">}</span>
-                        </div>
+            <div class="flex items-center gap-4 text-xs font-bold text-gray-600 bg-white/5 py-4 px-10 rounded-full">
+                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                AVAILABLE FOR NEW OPPORTUNITIES
+            </div>
+        </div>
+    </section>
 
-                        <div class="section-header">
-                            <h2><span class="keyword">public enum</span> <span class="class-name">Languages</span> <span class="punctuation">{</span></h2>
-                        </div>
-            
-                        <div class="languages-container">
-                            <div class="language-item">
-                                <div class="language-name">ARABIC</div>
-                                <div class="language-proficiency">
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-level-text">Native</span>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div class="language-name">FRENCH</div>
-                                <div class="language-proficiency">
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot"></span>
-                                     <span class="proficiency-level-text">Fluent (C1)</span>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div class="language-name">ENGLISH</div>
-                                <div class="language-proficiency">
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot"></span>
-                                     <span class="proficiency-level-text">Advanced (C1)</span>
-                                </div>
-                            </div>
-                             <div class="language-item">
-                                <div class="language-name">SPANISH</div>
-                                <div class="language-proficiency">
-                                    <span class="proficiency-dot filled"></span>
-                                    <span class="proficiency-dot "></span>
-                                    <span class="proficiency-dot"></span>
-                                    <span class="proficiency-dot"></span>
-                                    <span class="proficiency-dot"></span>
-                                    <span class="proficiency-level-text">Beginner (A2)</span>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Footer -->
+    <footer class="py-20 text-center text-gray-600 text-xs border-t border-white/5 mx-6">
+        <p>Built with High-End Aesthetic & Precision Performance</p>
+        <p class="mt-2 text-[10px] tracking-widest opacity-50 uppercase">Precision. Reliability. Innovation.</p>
+        <p class="mt-4">© 2026 Douae Bakkali. Source: <a href="https://github.com/DouaeBakkali269/"
+                class="hover:text-[var(--accent)] underline">GitHub</a></p>
+    </footer>
 
+    <script>
+        // Lucide Icons
+        lucide.createIcons();
 
-                        <div class="section-footer">
-                            <span class="punctuation">}</span>
-                        </div>
-                    </section>
+        // Reveal Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
 
-            <!-- Education Section -->
-            <section id="education" class="section">
-                <div class="section-header">
-                    <h2><span class="keyword">public class</span> <span class="class-name">Education</span> <span class="punctuation">{</span></h2>
-                </div>
-                
-                <div class="education-cards">
-                    <!-- Current Education -->
-                    <div class="education-card">
-                        <div class="edu-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="edu-content">
-                            <h3>ENSIAS, Rabat</h3>
-                            <div class="edu-date">2023-2025</div>
-                            <p>2nd Year of Engineering Cycle, Software Engineering Major</p>
-                        </div>
-                    </div>
-                    
-                    <!-- CPGE -->
-                    <div class="education-card">
-                        <div class="edu-icon">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="edu-content">
-                            <h3>CPGE Moulay El Hassan, Tangier</h3>
-                            <div class="edu-date">2021-2023</div>
-                            <p>Preparatory Classes for Engineering Schools, Mathematics and Physics Option</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Baccalaureate -->
-                    <div class="education-card">
-                        <div class="edu-icon">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="edu-content">
-                            <h3>Lycee Technique Moulay Youssef, Tangier</h3>
-                            <div class="edu-date">2020-2021</div>
-                            <p>Baccalaureate, Mathematical Sciences B, Honors</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section-footer">
-                    <span class="punctuation">}</span>
-                </div>
-            </section>
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-
-            </section>
-            <section id="activities" class="section">
-                <div class="section-header">
-                    <h2><span class="keyword">public interface</span> <span class="class-name">VolunteerActivities</span> <span class="punctuation">{</span></h2>
-                </div>
-                
-                <div class="activity-cards">
-                    <!-- IEEE -->
-                    <div class="activity-card">
-                        <div class="activity-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>IEEE ENSIAS Events Lead</h3>
-                            <p>Organized major tech events and conferences, moderated panel discussions and managed logistics and speaker coordination.</p>
-                            <div class="activity-skills">
-                                <span>Project Management</span>
-                                <span>Public Speaking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Forum Geni -->
-                    <div class="activity-card">
-                        <div class="activity-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>Forum Geni Sponsorship Team</h3>
-                            <p>Secured sponsorships for annual career forum and organized student-professional networking events.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section-footer">
-                    <span class="punctuation">}</span>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="script.js"></script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const progress = document.getElementById('progress');
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progress.style.width = scrollPercent + '%';
+        });
+    </script>
 </body>
+
 </html>
