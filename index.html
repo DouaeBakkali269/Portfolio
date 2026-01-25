@@ -289,59 +289,7 @@
             transform: scale(1.2);
         }
 
-        /* Expanding CV Button */
-        .cv-btn-container {
-            display: flex;
-            align-items: center;
-            background: rgba(138, 43, 226, 0.15);
-            border: 1px solid rgba(0, 255, 243, 0.3);
-            border-radius: 99px;
-            padding: 0;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: 64px;
-            width: 64px;
-            color: #fff;
-            text-decoration: none;
-            position: relative;
-        }
 
-        .cv-btn-container:hover {
-            width: 220px;
-            padding: 0 25px;
-            border-color: rgba(0, 255, 243, 1);
-            background: rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 30px rgba(0, 255, 243, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .cv-btn-container i {
-            min-width: 64px;
-            display: flex;
-            justify-content: center;
-            transition: 0.4s;
-        }
-
-        .cv-btn-container span {
-            opacity: 0;
-            transform: translateX(20px);
-            white-space: nowrap;
-            font-weight: 800;
-            font-size: 14px;
-            transition: 0.4s;
-            position: absolute;
-            left: 64px;
-        }
-
-        .cv-btn-container:hover span {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .cv-btn-container:hover i {
-            min-width: 24px;
-            margin-right: 15px;
-        }
 
         /* Name Shimmer */
         .name-container {
@@ -406,7 +354,7 @@
                 passionate about <span class="text-white">DevOps automation</span>. Currently seeking PFE opportunities
                 to apply and further develop my skills.</p>
 
-            <div class="flex flex-wrap justify-center gap-8 items-center mt-12">
+            <div class="flex flex-wrap justify-center gap-8 items-center mt-16">
                 <a href="mailto:bakkalidouae75@gmail.com" class="hero-icon-link" title="Email">
                     <div class="icon-circle">
                         <i data-lucide="mail"></i>
@@ -430,14 +378,13 @@
                     </div>
                 </a>
 
-                <div class="relative group">
-                    <a href="CV_BAKKALI_DOUAE_PFE__DEV_Netopia.pdf" download class="cv-btn-container">
+                <a href="CV_BAKKALI_DOUAE_PFE__DEV_Netopia.pdf" download class="hero-icon-link" title="Download CV">
+                    <div class="icon-circle">
                         <i data-lucide="download"></i>
-                        <span>DOWNLOAD CV</span>
-                    </a>
-                    <div class="icon-ring absolute inset-0 pointer-events-none group-hover:opacity-100 group-hover:scale-110"
-                        style="inset: -4px; border-radius: 99px;"></div>
-                </div>
+                        <div class="icon-ring"></div>
+                        <div class="icon-glow"></div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
