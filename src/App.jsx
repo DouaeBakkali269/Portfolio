@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Analytics } from "@vercel/analytics/react";
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
@@ -8,6 +7,8 @@ import Skills from './components/Skills';
 import Volunteer from './components/Volunteer';
 import Education from './components/Education';
 import { resumeData } from './data';
+
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div className="portfolio-app">
+      <Analytics />
       <div className="mesh-gradient" />
 
       {/* Progress Bar */}
@@ -56,7 +58,6 @@ function App() {
           <Education items={resumeData.education} />
         </div>
       </main>
-      <Analytics />
 
       <style jsx>{`
         .nav-dock {

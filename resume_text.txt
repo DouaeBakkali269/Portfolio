@@ -1,0 +1,50 @@
+
+Douae BAKKALI
+# bakkalidouae75@gmail.com (cid:84) +212 7 77 59 31 49 (cid:239) linkedin.com/in/douae-bakkali § DouaeBakkali269
+Final-year Software Engineering student specializing in full-stack development and passionate about DevOps
+automation. Currently seeking PFE opportunities to apply and further develop my skills.
+Education
+Engineering Student – Software Engineering, ENSIAS, Rabat 2023 – 2026
+Preparatory Classes (MP) – Lyc´ee Moulay Hassan, Tangier 2021 – 2023
+Experience
+• Zen Networks Solutions Inc. | DevOps Intern June – August 2025
+◦ Implemented a complete DevOps workflow for a web application.
+◦ Containerized a full web application (backend in Spring Boot, frontend in React/Next.js).
+◦ Built a robust CI/CD pipeline on GitLab to automate build, test, and deployment processes.
+◦ Evaluated various deployment architectures on AWS and provisioned the selected one using Terraform.
+◦ Technologies: Docker, GitLab CI/CD, Terraform, AWS
+• Regional Administration of Tanger–T´etouan–Al Hoceima | Web Development Intern July 2024
+◦ Developed a complete inventory management system automating equipment requests and document generation, using
+Java Spring Boot for the backend and ReactJS for the frontend.
+◦ Designed the MySQL schema and implemented secure REST APIs with Spring Security.
+◦ Technologies: Java, Spring Boot, Spring Security, React, MySQL, REST API
+Projects
+• SmartTransit – Microservices-Based Urban Transport Management Application Ongoing
+◦ Implemented a microservices architecture with Spring Boot, inter-service communication via REST, Kafka for
+asynchronous event exchange, and a frontend built with React/Next.js.
+◦ Designed independent services for user management, ticketing, routes, subscriptions, and notifications — each with its
+own PostgreSQL database.
+◦ Technologies: Spring Boot, Spring Cloud, Kafka, PostgreSQL, Docker, React, Next.js, REST API
+• AstroLearn – Collaborative Space Exploration Platform March 2025
+◦ Designed a system for article sharing, space mission calendars, and educational courses using UML.
+◦ Developed backend APIs with Spring Boot and PostgreSQL, and frontend with Next.js/ReactJS.
+◦ Implemented automated testing (JUnit, Mockito) and moderation powered by LLMs.
+◦ Containerized with Docker and deployed via Terraform on AWS.
+◦ Technologies: Spring Boot, PostgreSQL, Next.js, React, JUnit, Mockito, LLM, Terraform, AWS
+• Internship Management System 2024 – 2025
+◦ Developed a web application for centralized internship management, handling students, companies, and supervisors.
+◦ Led backend development using Spring Boot, implementing business logic, REST APIs, and database integration with
+JPA.
+◦ Secured API endpoints with Spring Security; coordinated closely with frontend integration.
+◦ Containerized the application with Docker and managed version control using Git.
+◦ Technologies: Spring Boot, ReactJS, Oracle DB, JPA, Spring Security, Docker, Git, Postman
+Skills
+• Programming Languages: Java, Python, JavaScript
+• Web Frameworks & Tools: Spring Boot, React, Next.js
+• Databases: Oracle, MySQL, PostgreSQL
+• DevOps & Cloud: Git, GitLab CI/CD, Docker, Terraform, Ansible, kubernetes
+• Methodologies: Microservices Architecture, REST API Design, Agile/Scrum, UML, Object-Oriented Programming
+• Languages: Arabic (native), French (fluent), English (fluent)
+Certifications
+• Artificial Intelligence Analyst Certificate – IBM March 2025
+• Spring Framework Specialization – LearnQuest March 2025

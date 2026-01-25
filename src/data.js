@@ -1,4 +1,4 @@
-export const resumeData = {
+﻿export const resumeData = {
     name: "Douae Bakkali",
     title: "Software Engineer",
     email: "bakkalidouae75@gmail.com",
@@ -85,9 +85,10 @@ export const resumeData = {
     ],
     skills: {
         languages: ["Java", "Python", "JavaScript"],
-        frameworks: ["Spring Boot", "React", "Next.js"],
-        tools: ["Docker", "Kubernetes", "GitLab CI/CD", "Terraform", "Ansible"],
-        databases: ["Oracle", "MySQL", "PostgreSQL"]
+        frameworks: ["Spring Boot", "React", "Next.js", "FastAPI"],
+        tools: ["Docker", "Kubernetes", "GitLab CI/CD", "Terraform", "Ansible", "AWS"],
+        databases: ["Oracle", "MySQL", "PostgreSQL"],
+        ai_tools: ["LangChain", "ChromaDB", "Hugging Face"]
     },
     certifications: [
         { name: "IBM AI Analyst", date: "2025" },
