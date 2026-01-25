@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
@@ -17,6 +17,27 @@ function App() {
     damping: 30,
     restDelta: 0.001
   });
+
+  const [activeSection, setActiveSection] = useState('hero');
+
+  useEffect(() => {
+    const targets = ['hero', 'experience', 'projects', 'skills'];
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: [0.25, 0.6] }
+    );
+
+    targets.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="portfolio-app">
@@ -41,10 +62,10 @@ function App() {
 
       <nav className="nav-dock">
         <div className="nav-container">
-          <a href="#hero">~/home</a>
-          <a href="#experience">~/experience</a>
-          <a href="#projects">~/projects</a>
-          <a href="#skills">~/skills</a>
+          <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>~/home</a>
+          <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>~/experience</a>
+          <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>~/projects</a>
+          <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>~/skills</a>
         </div>
       </nav>
 
@@ -81,10 +102,33 @@ function App() {
           color: var(--text-dim);
           text-decoration: none;
           font-size: 13px;
-          transition: 0.3s;
+          transition: color 0.25s ease, transform 0.25s ease;
+          position: relative;
+          padding: 6px 0;
+        }
+        .nav-container a::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -6px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.25s ease;
         }
         .nav-container a:hover {
           color: var(--accent-primary);
+          transform: translateY(-1px);
+        }
+        .nav-container a:hover::after,
+        .nav-container a.active::after {
+          transform: scaleX(1);
+        }
+        .nav-container a.active {
+          color: #fff;
+          text-shadow: 0 0 8px rgba(0, 255, 65, 0.45);
         }
         .section-container {
           max-width: 1200px;

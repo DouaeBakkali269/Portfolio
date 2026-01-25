@@ -76,11 +76,14 @@ const Experience = ({ items }) => {
         }
         .tech-tags-mini { display: flex; gap: 10px; flex-wrap: wrap; }
         .tech-tag-mini {
-          font-size: 11px;
-          color: var(--accent-secondary);
-          padding: 4px 10px;
-          border: 1px solid rgba(0, 243, 255, 0.2);
-          background: rgba(0, 243, 255, 0.05);
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: #e8fbff;
+                    padding: 5px 12px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(0, 243, 255, 0.35);
+                    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,243,255,0.08));
+                    box-shadow: inset 0 1px 6px rgba(255,255,255,0.08), 0 8px 18px rgba(0,243,255,0.12);
         }
       `}</style>
         </section>

@@ -58,10 +58,14 @@ const Projects = ({ items }) => {
         .project-desc { color: var(--text-dim); margin-bottom: 25px; line-height: 1.6; max-width: 800px; }
         .project-tech-stack { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 25px; }
         .tech-pill {
-          font-size: 12px;
-          color: var(--accent-primary);
-          opacity: 0.8;
-          font-weight: bold;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #e8ffe8;
+                    padding: 6px 12px;
+                    border-radius: 999px;
+                    background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,255,65,0.08));
+                    border: 1px solid rgba(0, 255, 65, 0.35);
+                    box-shadow: inset 0 1px 6px rgba(255,255,255,0.08), 0 8px 18px rgba(0,255,65,0.12);
         }
         .project-links { display: flex; gap: 20px; }
         .project-links a { color: var(--text-dim); transition: 0.3s; }
