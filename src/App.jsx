@@ -98,6 +98,11 @@ function App() {
           display: flex;
           gap: 25px;
         }
+        @media (max-width: 640px) {
+          .nav-container {
+            gap: 12px;
+          }
+        }
         .nav-container a {
           color: var(--text-dim);
           text-decoration: none;
@@ -134,6 +139,16 @@ function App() {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+          .section-container {
+            padding: 0 20px;
+          }
+        }
+        @media (max-width: 480px) {
+          .section-container {
+            padding: 0 16px;
+          }
         }
       `}</style>
     </div>

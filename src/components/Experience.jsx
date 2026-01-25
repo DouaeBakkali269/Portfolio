@@ -48,10 +48,40 @@ const Experience = ({ items }) => {
 
             <style jsx>{`
         .section-padding { padding: 100px 0; }
+        @media (max-width: 768px) {
+          .section-padding { padding: 60px 0; }
+        }
+        @media (max-width: 480px) {
+          .section-padding { padding: 40px 0; }
+        }
         .section-title {
           font-size: 2.5rem;
           margin-bottom: 50px;
           color: var(--text-main);
+        }
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 1.8rem;
+        @media (max-width: 768px) {
+          .experience-card { padding: 24px; }
+        }
+        @media (max-width: 480px) {
+          .experience-card { padding: 16px; }
+        }
+            margin-bottom: 30px;
+          }
+        }
+        @media (max-width: 480px) {
+          .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+          }
+        @media (max-width: 768px) {
+          .role-info h3 { font-size: 1.2rem; }
+        }
+        @media (max-width: 480px) {
+          .role-info h3 { font-size: 1rem; }
+        }
         }
         .accent-text { color: var(--accent-primary); margin-right: 15px; }
         .experience-list { display: flex; flex-direction: column; gap: 30px; }

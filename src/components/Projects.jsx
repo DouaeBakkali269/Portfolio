@@ -48,7 +48,31 @@ const Projects = ({ items }) => {
 
             <style jsx>{`
         .section-padding { padding: 100px 0; }
+        @media (max-width: 768px) {
+          .section-padding { padding: 60px 0; }
+        }
+        @media (max-width: 480px) {
+          .section-padding { padding: 40px 0; }
+        }
         .section-title { font-size: 2.5rem; margin-bottom: 50px; }
+        @media (max-width: 768px) {
+          .section-title { font-size: 1.8rem; margin-bottom: 30px; }
+        }
+        @media (max-width: 768px) {
+          .project-card-wide { padding: 24px; }
+        }
+        @media (max-width: 480px) {
+          .project-card-wide { padding: 16px; }
+        }
+        @media (max-width: 480px) {
+          .section-title { font-size: 1.5rem; margin-bottom: 2
+        @media (max-width: 768px) {
+          .project-header h3 { font-size: 1.3rem; }
+        }
+        @media (max-width: 480px) {
+          .project-header h3 { font-size: 1.1rem; }
+        }0px; }
+        }
         .accent-text { color: var(--accent-primary); }
         .project-list { display: flex; flex-direction: column; gap: 40px; }
         .project-card-wide { padding: 40px; display: flex; flex-direction: column; }
