@@ -6,14 +6,30 @@
     github: "https://github.com/DouaeBakkali269/",
     education: [
         {
-            school: "ENSIAS, Rabat",
-            degree: "Engineering Student (Final-Year), Software Engineering",
-            date: "2023-2026"
+            school: "National Higher School for Computer Science and Systems Analysis (ENSIAS)",
+            degree: "State Engineer Diploma — Software Engineering",
+            track: "Systems & Software",
+            location: "Rabat, Morocco",
+            date: "2023 — Present",
+            description: "A competitive engineering program focused on advanced software development, systems analysis, and modern architectures. The curriculum blends theoretical foundations with applied projects to design scalable, reliable systems.",
+            highlights: [
+                "Software architecture, distributed systems, and cloud-native design",
+                "Algorithms, data structures, and performance optimization",
+                "Full-stack engineering, data engineering, and applied AI"
+            ]
         },
         {
-            school: "Lycée Moulay Hassan, Tangier",
-            degree: "Preparatory Classes (MP)",
-            date: "2021-2023"
+            school: "CPGE Moulay Al Hassan (Preparatory Classes for Engineering Schools)",
+            degree: "Preparatory Classes — MP (Mathematics & Physics)",
+            track: "MP Stream",
+            location: "Tangier, Morocco",
+            date: "2021 — 2023",
+            description: "An intensive two-year preparatory track emphasizing rigorous problem-solving and analytical thinking. The MP stream builds a strong foundation in mathematics and physics to prepare for national competitive engineering exams.",
+            highlights: [
+                "Advanced calculus, linear algebra, and probability",
+                "Classical mechanics, electromagnetism, and thermodynamics",
+                "Programming fundamentals and scientific reasoning"
+            ]
         }
     ],
     experience: [

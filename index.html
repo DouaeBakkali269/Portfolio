@@ -445,6 +445,32 @@
             transform: translateY(-1px) scale(1.03);
         }
 
+        .edu-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 65, 0.18);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+            background: linear-gradient(140deg, rgba(12, 12, 12, 0.85), rgba(8, 8, 8, 0.75));
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(420px circle at 10% 0%, rgba(0, 255, 65, 0.15), transparent 60%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .edu-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-top: 1px solid rgba(0, 255, 65, 0.35);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
         .nav-dock {
             position: fixed;
             bottom: 32px;
@@ -1128,6 +1154,7 @@
         <a href="#experience">~/exp</a>
         <a href="#projects">~/work</a>
         <a href="#skills">~/tools</a>
+        <a href="#education">~/edu</a>
         <a href="#contact">~/contact</a>
     </nav>
 
@@ -1806,29 +1833,39 @@
     <section id="education" class="max-w-5xl mx-auto py-32 px-6">
         <h2 class="text-4xl font-bold mb-16 reveal"><span class="text-[var(--accent)]">04.</span> Education</h2>
         <div class="space-y-8">
-            <div class="glass p-8 relative pl-12 border-l border-[var(--accent-dim)] reveal slide-left edu-item">
-                <div class="absolute -left-[9px] top-8 w-4 h-4 bg-[var(--accent)] rounded-full"></div>
+            <div class="glass edu-card p-8 relative pl-12 border-l border-[var(--accent-dim)] reveal slide-left edu-item">
                 <div class="flex items-start gap-4 mb-2">
                     <div class="shrink-0"><img src="/ensias.png" alt="ENSIAS logo" class="edu-logo" loading="lazy"></div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row justify-between mb-1">
-                            <h3 class="text-xl font-bold">Engineering Student – Software Engineering</h3>
-                            <span class="text-gray-500">2023 – 2026</span>
+                            <h3 class="text-xl font-bold">State Engineer Diploma — Software Engineering</h3>
+                            <span class="text-gray-500">2023 — Present</span>
                         </div>
-                        <p class="text-gray-400">ENSIAS, Rabat</p>
+                        <p class="text-[var(--accent-secondary)]">National Higher School for Computer Science and Systems Analysis (ENSIAS)</p>
+                        <p class="text-gray-500 text-sm mt-3 leading-relaxed">A competitive engineering program focused on systems analysis, software architecture, and modern development practices. The curriculum blends rigorous theory with hands-on projects to design scalable, reliable systems.</p>
+                        <ul class="mt-4 space-y-2 text-gray-400 text-sm">
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Distributed systems, cloud-native design, and software architecture</li>
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Algorithms, data structures, and performance optimization</li>
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Full-stack engineering, data engineering, and applied AI</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="glass p-8 relative pl-12 border-l border-[var(--accent-dim)] reveal slide-left edu-item">
-                <div class="absolute -left-[9px] top-8 w-4 h-4 bg-[var(--accent)] rounded-full"></div>
+            <div class="glass edu-card p-8 relative pl-12 border-l border-[var(--accent-dim)] reveal slide-left edu-item">
                 <div class="flex items-start gap-4 mb-2">
                     <div class="shrink-0"><img src="/cpge.png" alt="CPGE logo" class="edu-logo" loading="lazy"></div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row justify-between mb-1">
-                            <h3 class="text-xl font-bold">Preparatory Classes (MP)</h3>
+                            <h3 class="text-xl font-bold">Preparatory Classes — MP (Mathematics & Physics)</h3>
                             <span class="text-gray-500">2021 – 2023</span>
                         </div>
-                        <p class="text-gray-400">Lycée Moulay Hassan, Tangier</p>
+                        <p class="text-[var(--accent-secondary)]">CPGE Moulay Al Hassan (Preparatory Classes for Engineering Schools)</p>
+                        <p class="text-gray-500 text-sm mt-3 leading-relaxed">An intensive two-year preparatory track emphasizing advanced mathematics, physics, and rigorous problem-solving to prepare for national competitive engineering exams.</p>
+                        <ul class="mt-4 space-y-2 text-gray-400 text-sm">
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Advanced calculus, linear algebra, and probability</li>
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Classical mechanics, electromagnetism, and thermodynamics</li>
+                            <li class="flex gap-3"><span class="text-[var(--accent)]">▹</span>Programming fundamentals and scientific reasoning</li>
+                        </ul>
                     </div>
                 </div>
             </div>
